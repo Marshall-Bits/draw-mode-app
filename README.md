@@ -2,7 +2,13 @@
 
 ## Description
 
-This is a simple app for windows that allows you to draw lines on the screen over other apps. It's written in C# and uses the DotNet framework.
+This is a simple app for windows that allows you to draw lines on the screen on top of other apps. 
+
+## Tech
+- C#
+- .NET
+
+## Contributing
 
 Fork and clone the repository to your local machine. 
 You can run it using the following command:

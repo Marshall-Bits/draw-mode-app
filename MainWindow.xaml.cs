@@ -12,7 +12,8 @@ namespace draw_mode_app
     {
         private Point? _startPoint = null;
         private Line? _currentLine = null;
-        private Brush? _currentBrush = Brushes.LightYellow;
+        private Brush? _currentBrush = Brushes.LightCoral;
+        private bool _isBackgroundTransparent = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -59,8 +60,35 @@ namespace draw_mode_app
             }
         }
 
+        private void ToggleBackground()
+        {
+            if (_isBackgroundTransparent)
+            {
+                var brush = (SolidColorBrush?)new BrushConverter().ConvertFrom("#01FFFFFF");
+                if (brush != null)
+                {
+                    this.Background = brush;
+                }
+                _isBackgroundTransparent = false;
+            }
+            else
+            {
+                this.Background = Brushes.Transparent;
+                _isBackgroundTransparent = true;
+            }
+
+            canvas.Children.Clear();
+        }
+
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.T)
+            {
+                ToggleBackground();
+                return;
+            }
+
+
             switch (e.Key)
             {
                 case Key.Escape:
@@ -69,17 +97,17 @@ namespace draw_mode_app
 
                 case Key.D1:
                 case Key.NumPad1:
-                    _currentBrush = Brushes.LightYellow; 
+                    _currentBrush = Brushes.LightCoral;
                     break;
 
                 case Key.D2:
                 case Key.NumPad2:
-                    _currentBrush = Brushes.LightGreen; 
+                    _currentBrush = Brushes.LightGreen;
                     break;
 
                 case Key.D3:
                 case Key.NumPad3:
-                    _currentBrush = Brushes.LightCoral; 
+                    _currentBrush = Brushes.LightYellow;
                     break;
 
                 default:
